@@ -1,4 +1,3 @@
-
 import json
 import requests
 import os
@@ -11,7 +10,7 @@ app.secret_key = os.urandom(12)
 
 app.config["DISCORD_CLIENT_ID"] = 1061216209355419708    
 app.config["DISCORD_CLIENT_SECRET"] = "L8UOkUUX5mjoeqFtztoZFtJXXiSGztLU"              
-app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback/"   
+app.config["DISCORD_REDIRECT_URI"] = "http:///callback/"   
 app.config["DISCORD_BOT_TOKEN"] = "MTA2MTIxNjIwOTM1NTQxOTcwOA.GAWx3i.WKsz2lXpOseQppsYBxLFVgAHVfDipEoTLEIlhE"
 discord = DiscordOAuth2Session(app)
 
