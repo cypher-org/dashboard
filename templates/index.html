@@ -1,41 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "master.html" %}
 
-<head>
+{% block css %}<link rel="stylesheet" href="{{url_for('static', filename='/css/main.css')}}">{% endblock css %}
+
+{% block content %}
+
     
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='/css/main.css')}}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
-</script>
+<section id="loader">
 
-    <!--link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script-- defer src="https://pyscript.net/latest/pyscript.js"></script-->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        red: '#fd5200',
-                        blue: '#279AF1',
-                        black: '#070600',
-                        light: "#F7F7FF",
-                        blueHover: "hsla(206, 88%, 55%, 0.3)"
-                    }
-                }
-            }
-        }
-    </script>
-    <title>Cypher Dashboard</title>
-</head>
-
-<body  data-auth="{{auth}}" id="body" class=" overflow-y-hidden text-light bg-black"  >
-
-
-<section id="loader" class="relative">
 <br><br><center>
 <img src="{{url_for('static', filename='/images/logo.png')}}"  class="absolute">
 </center>
@@ -55,17 +26,7 @@
                 $('#'+target).toggle("slide", { direction: "left" }, 500);;
         }
     </script>
-    <style>
-        ::-webkit-scrollbar {
-            display: none;
-        }                                                                                
 
-        * {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-    </style>
   <div class="min-h-screen flex">
     <div id="side-nav" class="overflow-y-scroll top=0 absolute lg:relative h-screen w-screen lg:w-[18.225em] bg-gray-900">
 
@@ -120,18 +81,9 @@
 
     <div class="card rounded-small">
         <div class="bg-green-900 ml-3">TEST TITLE</div>
-    </div
-    test card
     </div>
-    </div>
-
-
-    <!--py-script src="{{url_for('static',filename='/python/front.py')}}"> </!--py-script-->
   
 </div>
 </section>
-    <script defer src="{{url_for('static',filename='/js/index.js')}}">
-    </script>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
-        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-</body>
+    <script defer src="{{url_for('static',filename='/js/index.js')}}"></script>
+{% endblock content %}
