@@ -1,4 +1,8 @@
+
 window.location.hash = "user"
+
+
+
 
 
 
@@ -7,11 +11,22 @@ setTimeout(()=>{
     document.getElementById("page").classList.remove("hidden")
     document.getElementById("loader").classList.add("hidden")
     document.getElementById("side-nav").style.height = window.innerHeight - 74  + "px"
-    document.getElementById("doubleDropdown").style.height = window.innerHeight - 74  + "px"
+    if ( window.innerWidth < 748){ 
+        document.getElementById("side-nav").style.display = "none"
+        document.getElementById("side-nav").style.width = window.innerWidth - 10  + "px"
+    } else {
+        document.getElementById("side-nav").style.width = "18.225em"
+    }
 },2500)
 
 
-
+window.addEventListener("change",()=>{
+    if ( window.innerWidth < 748){ 
+        document.getElementById("side-nav").style.width = window.innerWidth - 10  + "px"
+    } else {
+        document.getElementById("side-nav").style.width = "18.225em"
+    }
+})
 
 
 
@@ -33,21 +48,16 @@ function toggleBar(id, target) {
 let auth = document.getElementById("body").dataset.auth
 
 
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        guilds = JSON.parse(this.responseText)["guilds"];
-        user = JSON.parse(this.responseText)["userinfo"]
-
-        // for dropdown 
+fetch(`/getuser/${auth}`)
+    .then(response => response.json())
+    .then(responseText => {
+        guilds = responseText["guilds"];
+        user = responseText["userinfo"]
         document.getElementById("selected").innerHTML =  user["username"]
         let icon = document.createElement("img");
         document.getElementById("doubleDropdownButton").appendChild(icon)
         icon.src = `https://cdn.discordapp.com/avatars/${user["id"]}/${user["avatar"]}.png`
         icon.classList.add("rounded-full", "h-10", "w-10", "inline")
-
-
-        // for menu 
         const list = document.createElement("li");
         icon = document.createElement("img");
         const anchor = document.createElement("a");
@@ -103,21 +113,15 @@ xhttp.onreadystatechange = function () {
             icon.classList.add("rounded-full", "h-10", "w-10", "inline")
             document.getElementById("guilds").appendChild(list)
             
-        }
-    }
-};
-xhttp.open("GET", `/getuser/${auth} `, true);
-xhttp.send();
-/*
-addEventListener('hashchange', (event) => {
-    var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       guilds = JSON.parse(this.responseText)["guilds"];
+        }})
 
-    }
-};
-xhttp.open("GET", `//${auth} `, true);
-xhttp.send();
-});
-*/
+
+fetch('/user.html')
+    .then(response => response.text())
+    .then(html => {
+        setTimeout(()=>{
+            document.getElementById("page-setting").classList.remove("hidden")
+            document.getElementById("loader-content").classList.add("hidden")
+            document.getElementById('text').innerHTML = html;
+        },3000)
+    });

@@ -1,4 +1,5 @@
 import json
+from jwt import DecodeError
 import requests
 import os
 from flask import Flask, redirect, url_for,render_template ,abort
@@ -10,7 +11,7 @@ app.secret_key = os.urandom(12)
 
 app.config["DISCORD_CLIENT_ID"] = 1061216209355419708    
 app.config["DISCORD_CLIENT_SECRET"] = "L8UOkUUX5mjoeqFtztoZFtJXXiSGztLU"              
-app.config["DISCORD_REDIRECT_URI"] = "https://cypherdashboard.yhyareplit.repl.co/callback/"   
+app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback/" #https://cypherdashboard.yhyareplit.repl.co/callback/  
 app.config["DISCORD_BOT_TOKEN"] = "MTA2MTIxNjIwOTM1NTQxOTcwOA.GAWx3i.WKsz2lXpOseQppsYBxLFVgAHVfDipEoTLEIlhE"
 discord = DiscordOAuth2Session(app)
 
@@ -27,8 +28,11 @@ def redirect_unauthorized(e):
 
 @app.route("/callback/")
 def callback():
-    discord.callback()
-    return redirect(url_for("index"))
+    try:
+        discord.callback()
+        return redirect(url_for("index"))
+    except DecodeError:
+        redirect(url_for('index'))
 
 
 @app.route('/getuser/<token>')
@@ -57,8 +61,11 @@ def guild_get(id):
 @app.route('/')
 @requires_authorization
 def index():
-    auth = discord.get_authorization_token()['access_token']
-    return render_template("/index.html",auth=auth)
+    try:
+        auth = discord.get_authorization_token()['access_token']
+        return render_template("/index.html",auth=auth)
+    except DecodeError:
+        redirect(url_for('index'))
 
 @app.errorhandler(404)
 def page_not_found(_e):
@@ -68,6 +75,11 @@ def page_not_found(_e):
 @app.route("/ratelimit")
 def ratelimit():
     return render_template("/errors/ratelimit.html")
+
+
+@app.route("/user.html")
+def user():
+    return render_template("/settings/user.html")
 
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0")

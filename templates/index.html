@@ -8,7 +8,7 @@
 <section id="loader">
 
 <br><br><center>
-<img src="{{url_for('static', filename='/images/logo.png')}}"  class="absolute">
+<img src="{{url_for('static', filename='/images/logo.png')}}" class="h-20 w-20">
 </center>
 </section>
 
@@ -16,7 +16,7 @@
 
 <section id="page" class="hidden">
 
-      <nav class="width[100%] p-3 bg-gray-800  ">
+      <nav class="width[100%] p-3 bg-gray-800">
         <img src="{{url_for('static', filename='/images/logo.png')}}" 
         height="50" width="50" class="inline"> Cypher <span class="font-bold">Dashboard</span>
         <span id="menu" class="lg:hidden absolute right-0 mr-2" role="button" onclick="toggleNav('menu','side-nav')"><i class="bi bi-list"></i><span>
@@ -28,7 +28,7 @@
     </script>
 
   <div class="min-h-screen flex">
-    <div id="side-nav" class="overflow-y-scroll top=0 absolute lg:relative h-screen w-screen lg:w-[18.225em] bg-gray-900">
+    <div id="side-nav" class="overflow-y-scroll top=0 absolute lg:relative h-screen  bg-gray-900">
 
         <div id="servers" class="items-center flex justify-center center w-full overflow-x-scroll h-14 bg-gray-600 px-2">
         <button id="doubleDropdownButton"
@@ -76,11 +76,17 @@
 </div>
 
     <div class="flex-1" id="mainContent">
+    
+<section id="loader-content">
 
-    <div class="mx-8 my-5 p-5">
+<br><br><center>
+<img src="{{url_for('static', filename='/images/logo.png')}}" class="h-20 w-20">
+</center>
+</section>
 
+    <div class="hidden" id="page-setting">
     <div class="card rounded-small">
-        <div class="bg-green-900 ml-3">TEST TITLE</div>
+        <div class="ml-2" id="text">TEST TITLE</div>
     </div>
   
 </div>
