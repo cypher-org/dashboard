@@ -9,10 +9,10 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT']  ='1'
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
-app.config["DISCORD_CLIENT_ID"] = 1061216209355419708    
-app.config["DISCORD_CLIENT_SECRET"] = "L8UOkUUX5mjoeqFtztoZFtJXXiSGztLU"              
-app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback/" #https://cypherdashboard.yhyareplit.repl.co/callback/  
-app.config["DISCORD_BOT_TOKEN"] = "MTA2MTIxNjIwOTM1NTQxOTcwOA.GAWx3i.WKsz2lXpOseQppsYBxLFVgAHVfDipEoTLEIlhE"
+app.config["DISCORD_CLIENT_ID"] = ""
+app.config["DISCORD_CLIENT_SECRET"] = ""              
+app.config["DISCORD_REDIRECT_URI"] = "http://127.0.0.1:5000/callback/"   
+app.config["DISCORD_BOT_TOKEN"] = ""
 discord = DiscordOAuth2Session(app)
 
 auth = {}
@@ -50,7 +50,7 @@ def user_get(token):
 
 @app.route('/getguild/<id>')
 def guild_get(id):
-    head = {"authorization": f"Bot MTA2MTIxNjIwOTM1NTQxOTcwOA.GAWx3i.WKsz2lXpOseQppsYBxLFVgAHVfDipEoTLEIlhE"}
+    head = {"authorization": f"Bot "}
     info = {
         "guildinfo":dict(requests.get(f"https://discord.com/api/v9/guilds/{id}", headers=head).json()),
         "members":list(requests.get(f"https://discord.com/api/v9/guilds/{id}/members", headers=head).json())
